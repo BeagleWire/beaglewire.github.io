@@ -95,20 +95,22 @@ dtc -O dtb -o DTS/BW-ICE40Cape-00A0.dtbo -b 0 -@ DTS/BW-ICE40Cape-00A0.dts && su
 - Adding device tree Overlay in boot files : 
 `sudo vim /boot/uEnv.txt`
 
-- Find the following part
+- Find the following part:
+
 ```
 ###Additional custom capes
 #uboot_overlay_addr4=/lib/firmware/<file4>.dtbo
-
 enable_uboot_cape_universal=1
 ```
+
 - Instead add this
+
 ```
 ###Additional custom capes
 uboot_overlay_addr4=/lib/firmware/BW-ICE40Cape-00A0.dtbo
-
 #enable_uboot_cape_universal=1
 ```
+
 - Reboot: `sudo reboot`
 
 ---
