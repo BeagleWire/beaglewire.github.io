@@ -92,10 +92,9 @@ git checkout testing    #For initial period, later will be merged with master
 cd BeagleWire
 dtc -O dtb -o DTS/BW-ICE40Cape-00A0.dtbo -b 0 -@ DTS/BW-ICE40Cape-00A0.dts && sudo cp DTS/BW-ICE40Cape-00A0.dtbo /lib/firmware
 ```
-- Adding device tree Overlay in boot files
-```
-sudo vim /boot/uEnv.txt
-```
+- Adding device tree Overlay in boot files : 
+`sudo vim /boot/uEnv.txt`
+
 - Find the following part
 ```
 ###Additional custom capes
