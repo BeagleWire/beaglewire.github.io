@@ -45,7 +45,7 @@ Linux beaglebone 4.19.94-ti-r64 #1buster SMP PREEMPT Fri May 21 23:57:28 UTC 202
     1. [Derekmolly's tutorial](http://derekmolloy.ie/write-a-new-image-to-the-beaglebone-black/)
     2. [Adafruit tutorial](https://learn.adafruit.com/beaglebone-black-installing-operating-systems/flashing-the-beaglebone-black)
 
----
+
 ---
 
 ## 2) Upgrade the software on your Beagle
@@ -67,7 +67,7 @@ sudo apt upgrade
 ```
 ### Addition References: [Upgrade the software on your Beagle](https://beagleboard.org/upgrade#:~:text=There%20are%204%20main%20steps,up%20scripts%20and%20Linux%20kernel&text=Update%20examples%20in%20the%20Cloud9%20IDE%20workspace)
 
----
+
 ---
 
 ## 3) Installing Linux Headers
@@ -75,14 +75,14 @@ sudo apt upgrade
 sudo apt update
 sudo apt install linux-headers-$(uname -r)
 ```
----
+
 ---
 ## 4) Getting BeagleWire Software:
 ```
 git clone https://github.com/BeagleWire/BeagleWire 
 git checkout testing    #For initial period, later will be merged with master
 ```
----
+
 ---
 ## 5) Device Tree Overlay:
 - Device Tree is required for enabling SPI and GPMC.
@@ -118,8 +118,16 @@ disable_uboot_overlay_wireless=1
 - Reboot: `sudo reboot`
 
 ---
+## 6) Writing EEPROM configuration contents
+
+- BeagleWire cape has a EEPROM memory, so that the BBB device overlay is automatically loaded up on each boot up. EEPROM contents and loading script are located in BeagleWire software repository.
+
+```
+cd BeagleWire/EEPROM_Cape/
+sudo ./load_eeprom.sh
+```
 ---
-## 6) LED Blinking:
+## 7) LED Blinking:
 - Building Custom LKM module
     ```
     cd BeagleWire/load_fw/
