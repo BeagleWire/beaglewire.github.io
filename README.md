@@ -1,3 +1,7 @@
+---
+sort: 1
+---
+
 # BeagleWire - FPGA development cape for the BeagleBone
 
 - The BeagleWire is an FPGA development platform that has been designed for use with BeagleBone boards. BeagleWire is a cape on which there is an FPGA device - Lattice iCE40HX.
