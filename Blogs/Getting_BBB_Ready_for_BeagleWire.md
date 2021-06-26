@@ -1,7 +1,3 @@
----
-sort: 7
----
-
 # Getting BBB Ready for BeagleWire
 
 ## BeagleWire:

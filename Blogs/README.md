@@ -1,5 +1,5 @@
 ---
-sort: 5
+sort: 2
 ---
 
 # Detailed Guides for BeagleWire
