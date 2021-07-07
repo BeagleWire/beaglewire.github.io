@@ -68,5 +68,5 @@ sort: 1
 
 The project is the result of the community work and it is still under development. If you can support this project or if you have any questions, feel free to contact us.
 - Michael Welling mwelling@ieee.org
-- Omkar Bhilare ombhilare999@gmai.com
+- Omkar Bhilare ombhilare999@gmail.com
 - Patryk Mezydlo mezydlo.p@gmail.com

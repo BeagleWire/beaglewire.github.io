@@ -15,35 +15,15 @@
 - This gives you the image file: BBB*.img. Write the image to the memory card 
     > sudo dd if=./BBB*.img of=/dev/sdX
 
-### Flashing eMMC:
-- To set up the standalone microSD image to automatically flash the eMMC on powerup. Login as debian (password = temppwd) and edit /boot/uEnv.txt `sudo nano /boot/uEnv.txt`
-- In /boot/uEnv.txt:
-```
-##enable BBB: eMMC Flasher:
-#cmdline=init=/opt/scripts/tools/eMMC/init-eMMC-flasher-v3.sh
-```
-- Change to:
-```
-##enable BBB: eMMC Flasher:
-cmdline=init=/opt/scripts/tools/eMMC/init-eMMC-flasher-v3.sh
-```
-- Optional, update Flasher Scripts:
-```
-cd /opt/scripts/
-git pull
-```
-- reboot  **(make sure to remove the microSD after flashing is complete, otherwise it'll just keep on re-flashing the eMMC)**
-```
-sudo reboot
-```
-- **Confirm you have flashed the BBB with new image**
-```
-debian@beaglebone:~$ uname -a
-Linux beaglebone 4.19.94-ti-r64 #1buster SMP PREEMPT Fri May 21 23:57:28 UTC 2021 armv7l GNU/Linux
-```
+### Booting from SD Card:
+
+- GPMC has been used to transfer the data between FPGA cape and ARM.
+- **GPMC and EMMC pins are multiplexed**, so if one needs to use GPMC then BBB should be booted from **SD Card Only.**
+
 - For details steps once can follow below tutorials:
-    1. [Derekmolly's tutorial](http://derekmolloy.ie/write-a-new-image-to-the-beaglebone-black/)
-    2. [Adafruit tutorial](https://learn.adafruit.com/beaglebone-black-installing-operating-systems/flashing-the-beaglebone-black)
+    1. [Booting your BeagleBone board from a SD card](https://subscription.packtpub.com/book/hardware_and_creative/9781785285059/1/ch01lvl1sec14/booting-your-beaglebone-board-from-a-sd-card)
+    2. [Derekmolly's tutorial](http://derekmolloy.ie/write-a-new-image-to-the-beaglebone-black/)
+    3. [Adafruit tutorial](https://learn.adafruit.com/beaglebone-black-installing-operating-systems/flashing-the-beaglebone-black)
 
 
 ---
@@ -78,10 +58,9 @@ sudo apt install linux-headers-$(uname -r)
 
 ---
 ## 4) Getting BeagleWire Software:
-```
-git clone https://github.com/BeagleWire/BeagleWire 
-git checkout testing    #For initial period, later will be merged with master
-```
+
+> git clone https://github.com/BeagleWire/BeagleWire 
+
 
 ---
 ## 5) Device Tree Overlay:
@@ -95,12 +74,13 @@ dtc -O dtb -o DTS/BW-ICE40Cape-00A0.dtbo -b 0 -@ DTS/BW-ICE40Cape-00A0.dts && su
 - Adding device tree Overlay in boot files : 
 `sudo vim /boot/uEnv.txt`
 
-- Find the following part:
+- Find the following part: (**Disabling boot from emmc to use GPMC on the FPGA Cape**)
 
 ```
 ###Additional custom capes
 #uboot_overlay_addr4=/lib/firmware/<file4>.dtbo
 enable_uboot_cape_universal=1
+#disable_uboot_overlay_emmc=1
 #disable_uboot_overlay_audio=1
 #disable_uboot_overlay_wireless=1
 ```
@@ -111,6 +91,7 @@ enable_uboot_cape_universal=1
 ###Additional custom capes
 uboot_overlay_addr4=/lib/firmware/BW-ICE40Cape-00A0.dtbo
 #enable_uboot_cape_universal=1
+disable_uboot_overlay_emmc=1
 disable_uboot_overlay_audio=1
 disable_uboot_overlay_wireless=1
 ```
@@ -132,7 +113,6 @@ sudo ./load_eeprom.sh
     ```
     cd BeagleWire/load_fw/
     make    #This Make the LKM module for loading beaglewire with bitstream
-    sudo modprobe ice40-spi
     ./bw-prog.sh blink.bin
     ```
 - To check how programming is proceeding, use:
