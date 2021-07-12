@@ -1,3 +1,7 @@
+---
+sort: 5
+---
+
 ## Arm Blink LEDs
 
 - Example Directory: [arm_blink_leds](https://github.com/BeagleWire/BeagleWire/tree/master/examples/arm_blink_leds)
