@@ -1,6 +1,6 @@
 ---
-sort: 2
+sort: 3
 ---
 
-# Detailed Guides for BeagleWire
+# BeagleWire Drivers
 {% include list.liquid all=true %}
