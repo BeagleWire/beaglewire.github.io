@@ -16,8 +16,15 @@ cd examples/arm_blink_leds
 make
 
 # Else scp the .bin file in Beaglewire/examples/arm_blink_leds
+# In host computer go to Beaglewire/examples/arm_blink_leds
+# make
+# Command to send it to FPGA: 
+# scp arm_blink.bin debian@192.168.6.2:/home/debian/Beaglewire/examples/arm_blink_leds
 
-make load
+# Loading SPI flash after FPGA reset, it will be boot up on SPI.
+make load_spi
+
+# Reset the FPGA for running bitsream (RST Button on BeagleWire)
 ```
 
 ### Running arm blink script for transferring the memory words from ARM to FPGA (LEDs)

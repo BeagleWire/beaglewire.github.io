@@ -52,56 +52,42 @@ sudo apt upgrade
 
 ## 3) Installing Linux Headers
 ```
-sudo apt update
 sudo apt install linux-headers-$(uname -r)
 ```
 
 ---
 ## 4) Getting BeagleWire Software:
 
-> git clone https://github.com/BeagleWire/BeagleWire 
-
-
+```
+ git clone https://github.com/BeagleWire/BeagleWire 
+ git checkout testing   
+```
 ---
 ## 5) Device Tree Overlay:
-- Device Tree is required for enabling SPI and GPMC.
 
-- Compile the dts file and paste it to /lib/firmware
-```
-cd BeagleWire
-dtc -O dtb -o DTS/BW-ICE40Cape-00A0.dtbo -b 0 -@ DTS/BW-ICE40Cape-00A0.dts && sudo cp DTS/BW-ICE40Cape-00A0.dtbo /lib/firmware
-```
-- Adding device tree Overlay in boot files : 
-`sudo vim /boot/uEnv.txt`
-
-- Find the following part: (**Disabling boot from emmc to use GPMC on the FPGA Cape**)
+- Device Tree Overlay is required for initializing the spidev to program the FPGA and gpmc to communicate with FPGA for data transfer.
 
 ```
-###Additional custom capes
-#uboot_overlay_addr4=/lib/firmware/<file4>.dtbo
-enable_uboot_cape_universal=1
-#disable_uboot_overlay_emmc=1
-#disable_uboot_overlay_audio=1
-#disable_uboot_overlay_wireless=1
-```
+git clone https://github.com/BeagleWire/BeagleBoard-DeviceTrees
+cd BeagleBoard-DeviceTrees
+make
+sudo cp src/arm/overlays/BW-ICE40Cape-00A0.dtbo /lib/firmware
 
-- Instead add this
+#  Create dtb backup:
+sudo cp /boot/dtbs/4.19*/am335x-boneblack-uboot-univ.dtb am335x-boneblack-uboot-univ.dtb.backup
 
+# Install the new dtb:
+cd BeagleBoard-DeviceTrees
+sudo cp src/arm/am335x-boneblack-uboot-univ.dtb /boot/dtbs/4.19*/
 ```
-###Additional custom capes
-uboot_overlay_addr4=/lib/firmware/BW-ICE40Cape-00A0.dtbo
-#enable_uboot_cape_universal=1
-disable_uboot_overlay_emmc=1
-disable_uboot_overlay_audio=1
-disable_uboot_overlay_wireless=1
-```
-
-- Reboot: `sudo reboot`
 
 ---
 ## 6) Writing EEPROM configuration contents
 
-- BeagleWire cape has a EEPROM memory, so that the BBB device overlay is automatically loaded up on each boot up. EEPROM contents and loading script are located in BeagleWire software repository.
+- BeagleWire cape has a EEPROM memory, so that the BBB device overlay is automatically loaded up on each boot up. 
+- EEPROM contents and loading script are located in BeagleWire software repository.
+- **So once we program the eeprom, then we don't have to explicitly add overlay info in uEnv.txt at any addr4**
+- If `BW-ICE40Cape-00A0.dtbo` is present in /lib/firmware then it will be automatically loaded.
 
 ```
 cd BeagleWire/EEPROM_Cape/
@@ -109,19 +95,36 @@ sudo ./load_eeprom.sh
 ```
 ---
 ## 7) LED Blinking:
-- Building Custom LKM module
-    ```
-    cd BeagleWire/load_fw/
-    make    #This Make the LKM module for loading beaglewire with bitstream
-    ./bw-prog.sh blink.bin
-    ```
-- To check how programming is proceeding, use:
-    ```
-    dmesg
-    ```
-- Results Should Like this:
-    ```
-    [ 2427.827170] Starting FPGA loader 
-    [ 2427.830561] fpga_manager fpga0: writing blink.bin to Lattice iCE40 FPGA Manager
-    [ 2428.012162] Stopping FPGA loader     
-    ```
+- There are two ways to program the FPGA:
+1. First we program the onboard SPI flash, after reset the fpga is booted from spi flash. Even after power cut the program is retain.
+2. Directly programmnig the FPGA using custom LKM, in this method FPGA is directly programmed with bitstream and after power cut program is no longer exist.
+
+
+### SPI Programming method for LED Blink:
+
+1. Ensure you have added `BW-ICE40Cape-00A0.dtbo` overlay in /lib/firmware.
+
+- Example Directory: [blink_leds](https://github.com/BeagleWire/BeagleWire/tree/master/examples/blink_leds)
+- The LEDs are blink via simple counter logic
+
+### Flash the FPGA SPI with blink_leds bitstream 
+```
+cd examples/blink_leds
+
+# If the fpga tools present on BBB
+make
+
+# Else scp the .bin file in Beaglewire/examples/blink_leds
+# In host computer go to Beaglewire/examples/blink_leds
+# make
+# Command to send it to FPGA: 
+# scp blink.bin debian@192.168.6.2:/home/debian/Beaglewire/examples/blink_leds
+
+# Loading SPI flash after FPGA reset, it will be boot up on SPI.
+make load_spi
+
+# Reset the FPGA for running bitsream (RST Button on BeagleWire)
+```
+
+### FPGA LKM method for LED Blink:
+- To Be added
