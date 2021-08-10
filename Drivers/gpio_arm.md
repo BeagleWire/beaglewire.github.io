@@ -1,4 +1,4 @@
-GPIO (verilog)
+# GPIO 
 
 Features:
   - dodatkowe 54 piny I/O

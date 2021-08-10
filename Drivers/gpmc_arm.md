@@ -1,4 +1,4 @@
-# GPMC (Verilog)
+# GPMC 
 
 Features:
 

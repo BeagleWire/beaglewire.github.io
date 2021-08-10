@@ -1,4 +1,4 @@
-# uart (verilog)
+# UART 
 
 features:
   - verilog source code of a universal asynchronous receiver/transmitter (uart)

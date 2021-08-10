@@ -1,4 +1,4 @@
-# PWM (verilog)
+# PWM 
 
 Features:
   - Verilog source code of a PWM generator component

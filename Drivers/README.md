@@ -1,6 +1,6 @@
 ---
-sort: 3
+sort: 4
 ---
 
-# BeagleWire Drivers
+# BeagleWire_Drivers
 {% include list.liquid all=true %}

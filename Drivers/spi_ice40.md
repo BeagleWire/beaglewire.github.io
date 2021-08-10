@@ -1,4 +1,4 @@
-# SPI (Verilog)
+# SPI 
 
 Features:
   - Verilog source code of a Serial Peripheral Interface (SPI) master component
