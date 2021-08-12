@@ -1,3 +1,7 @@
+---
+sort: 1
+---
+
 # Getting BBB Ready for BeagleWire
 
 ## BeagleWire:
