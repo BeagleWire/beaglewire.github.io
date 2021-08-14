@@ -4,7 +4,6 @@ sort: 1
 
 # Getting BBB Ready for BeagleWire
 
-## BeagleWire:
 
 <p align="center">
     <img width="455" height="315" src="../assets/beaglewire.png">
@@ -13,11 +12,7 @@ sort: 1
 ## 1) Flashing BeagleBone Black With New Image
 
 - First of all download this image from beagleboard site: [AM3358 Debian 10.3 2020-04-06 4GB SD IoT](https://debian.beagleboard.org/images/bone-debian-10.3-iot-armhf-2020-04-06-4gb.img.xz)
-- Mount the sdcard
-- Decompress the .xz file
-    > xz -d BBB*.xz
-- This gives you the image file: BBB*.img. Write the image to the memory card 
-    > sudo dd if=./BBB*.img of=/dev/sdX
+- Using this tool flash the SD_card: [balena-etcher](https://www.balena.io/etcher/)
 
 ### Booting from SD Card:
 
@@ -25,10 +20,7 @@ sort: 1
 - **GPMC and EMMC pins are multiplexed**, so if one needs to use GPMC then BBB should be booted from **SD Card Only.**
 
 - For details steps once can follow below tutorials:
-    1. [Booting your BeagleBone board from a SD card](https://subscription.packtpub.com/book/hardware_and_creative/9781785285059/1/ch01lvl1sec14/booting-your-beaglebone-board-from-a-sd-card)
-    2. [Derekmolly's tutorial](http://derekmolloy.ie/write-a-new-image-to-the-beaglebone-black/)
-    3. [Adafruit tutorial](https://learn.adafruit.com/beaglebone-black-installing-operating-systems/flashing-the-beaglebone-black)
-
+    1. [Derekmolly's tutorial](http://derekmolloy.ie/write-a-new-image-to-the-beaglebone-black/)
 
 ---
 
@@ -54,20 +46,22 @@ sudo apt upgrade
 
 ---
 
-## 3) Installing Linux Headers
+## 3) Installing Linux Headers and Flashrom
 ```
-sudo apt install linux-headers-$(uname -r)
+sudo apt install linux-headers-$(uname -r) #Needed to directly program FPGA
+sudo apt-get install flashrom #Needed to program FPGA using spi method
 ```
 
 ---
-## 4) Getting BeagleWire Software:
+## 4) BeagleWire Software:
 
 ```
+ # Recommended to clone both on host and BBB
  git clone https://github.com/BeagleWire/BeagleWire 
  git checkout testing   
 ```
 ---
-## 5) Device Tree Overlay:
+## 5) Device Tree Overlay and uEnv.txt:
 
 - Device Tree Overlay is required for initializing the spidev to program the FPGA and gpmc to communicate with FPGA for data transfer.
 
@@ -76,6 +70,7 @@ git clone https://github.com/BeagleWire/BeagleBoard-DeviceTrees
 cd BeagleBoard-DeviceTrees
 make
 sudo cp src/arm/overlays/BW-ICE40Cape-00A0.dtbo /lib/firmware
+sudo cp src/arm/overlays/BW-ICE40Cape-00A0_LKM.dtbo /lib/firmware
 
 #  Create dtb backup:
 sudo cp /boot/dtbs/4.19*/am335x-boneblack-uboot-univ.dtb am335x-boneblack-uboot-univ.dtb.backup
@@ -84,6 +79,29 @@ sudo cp /boot/dtbs/4.19*/am335x-boneblack-uboot-univ.dtb am335x-boneblack-uboot-
 cd BeagleBoard-DeviceTrees
 sudo cp src/arm/am335x-boneblack-uboot-univ.dtb /boot/dtbs/4.19*/
 ```
+
+- Some of the things needs to be disabled in uEnv.txt to run the FPGA:
+- Find the following part: (Disabling boot from emmc to use GPMC on the FPGA Cape)
+
+```
+enable_uboot_cape_universal=1 #Keep Cape Universal Enabled
+#disable_uboot_overlay_emmc=1
+#disable_uboot_overlay_video=1
+#disable_uboot_overlay_audio=1
+#disable_uboot_overlay_wireless=1
+#disable_uboot_overlay_adc=1
+```
+- Instead add this
+
+```
+enable_uboot_cape_universal=1 #Keep Cape Universal Enabled
+disable_uboot_overlay_emmc=1
+disable_uboot_overlay_video=1
+disable_uboot_overlay_audio=1
+disable_uboot_overlay_wireless=1
+disable_uboot_overlay_adc=1
+```
+- Sample uEnv.txt: [reference](https://pastebin.pl/view/5282b9df)
 
 ---
 ## 6) Writing EEPROM configuration contents
@@ -98,37 +116,61 @@ cd BeagleWire/EEPROM_Cape/
 sudo ./load_eeprom.sh
 ```
 ---
-## 7) LED Blinking:
+## 7) Programming BeagleWire:
 - There are two ways to program the FPGA:
-1. First we program the onboard SPI flash, after reset the fpga is booted from spi flash. Even after power cut the program is retain.
-2. Directly programmnig the FPGA using custom LKM, in this method FPGA is directly programmed with bitstream and after power cut program is no longer exist.
+    1. First we program the onboard SPI flash, after reset the fpga is booted from spi flash. Even after power cut the program is retain.
+    (**Overlay: BW_ICE40Cape_00A0.dtbo**)
+    2. Directly programmnig the FPGA using custom LKM, in this method FPGA is directly programmed with bitstream and after power cut program is no longer exist. (**Overlay: BW_ICE40Cape_00A0_LKM.dtbo**)
 
 
-### SPI Programming method for LED Blink:
 
-1. Ensure you have added `BW-ICE40Cape-00A0.dtbo` overlay in /lib/firmware.
+- First of all add following lines in `.bashrc` at the end, so that those scripts can be run from anywhere.
+- `vim /home/debian/.bashrc`
 
-- Example Directory: [blink_leds](https://github.com/BeagleWire/BeagleWire/tree/master/examples/blink_leds)
-- The LEDs are blink via simple counter logic
-
-### Flash the FPGA SPI with blink_leds bitstream 
 ```
-cd examples/blink_leds
-
-# If the fpga tools present on BBB
-make
-
-# Else scp the .bin file in Beaglewire/examples/blink_leds
-# In host computer go to Beaglewire/examples/blink_leds
-# make
-# Command to send it to FPGA: 
-# scp blink.bin debian@192.168.6.2:/home/debian/Beaglewire/examples/blink_leds
-
-# Loading SPI flash after FPGA reset, it will be boot up on SPI.
-make load_spi
-
-# Reset the FPGA for running bitsream (RST Button on BeagleWire)
+# To run beaglewire script from anywhere
+ export PATH=$PATH:/home/debian/BeagleWire/load_fw
 ```
 
-### FPGA LKM method for LED Blink:
-- To Be added
+- Build LKM and make executable the load_fw directory beforehand:
+```
+cd BeagleWire/bridge_lib
+make #Build the memmap and other bridge files
+cd BeagleWire/load_fw
+make #Builds the lkm
+chmod +x * #Make the scripts and spi test executable
+```
+
+- There are several ways for programming bitstream into BeagleWire:
+
+
+## 1) Flashing the sram on beaglewire with bitstream: (simplest way)
+
+```
+    sudo su
+    source .bashrc 
+    bw-spi.sh <bin file to program>
+    #Example: bw-spi.sh blink.bin
+``` 
+
+## 2) LKM module with the ice40-spi kernel driver:
+
+- For this you need to load following DTS file into `uEnv.txt`
+
+```
+    sudo vim /boot/uEnv.txt
+    
+    #Add this overlay line at addr0 place:
+    #If we had added the overlay at addr4, bbb automatically will add BW-ICE40Cape-00A0.dtbo overlay
+    #So to override that file we need to add this at addr0
+    
+    uboot_overlay_addr0=/lib/firmware/BW-ICE40Cape-00A0_LKM.dtbo 
+    
+    #Disable the cape universal
+    #enable_uboot_cape_universal = 1
+
+    #Reboot after this
+``` 
+
+- `bw-prog.sh blink.bin` 
+- Using this way one can program any bitstream directly to the FPGA via ice40-spi kernel driver and LKM module.
