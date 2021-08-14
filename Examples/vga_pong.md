@@ -40,6 +40,6 @@ make load_spi
 # Reset the FPGA for running bitsream (RST Button on BeagleWire)
 ```
 
-### Demo:
+## Demo:
 
-- Demo Video of vga_pong can be found here: [Imgur](https://imgur.com/sAeCMZ2)
+https://user-images.githubusercontent.com/40693854/129450815-3e51923c-16e7-4065-a337-7529dd66d2c2.mp4
