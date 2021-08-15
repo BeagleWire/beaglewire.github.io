@@ -1,10 +1,8 @@
 ---
 sort: 1
 ---
-<h1>
-<p align="center">
-     <b>Project Report for GSoC 2021</b> 
-</p>
+<h1 align="center">
+    <b>Project Report for GSoC 2021</b> 
 </h1>
 
 ## BeagleWire - FPGA development cape for the BeagleBone Black
@@ -15,20 +13,27 @@ sort: 1
 
 ## Table of Contents
 - [BeagleWire](#beaglewire---fpga-development-cape-for-the-beaglebone-black)
+  - [About](#about)
   - [Introduction](#introduction)
   - [Work Done](#work-done)
-    - [1. Programming BeagleWire](#1.-programming-beaglewire)
-    - [2. Communication between BeagleWire and BBB](#2.-communication-between-beagleWire-and-bbb)
-    - [3. Wishbone Examples with Intercon support](#3.-wishbone-examples-with-intercon-support)
-    - [4. Litex Core: Award Winning Serv + LiteDRAM + UART Wisbone Crossover](#4.-litex-core:-award-winning-serv-+-litedram-+-uart-wisbone-crossover)
-    - [5. PMOD support of BeagleWire](#5.-pmod-support-of-beaglewire)
-    - [6. Increase Documentation](#6.-increase-documentation)
+    - [1. Programming BeagleWire](#1-programming-beaglewire)
+    - [2. Communication between BeagleWire and BBB](#2-communication-between-beaglewire-and-bbb)
+    - [3. Wishbone Examples with Intercon support](#3-wishbone-examples-with-intercon-support)
+    - [4. Litex Core: Award Winning Serv + LiteDRAM + UART Wisbone Crossover](#4-litex-core-award-winning-serv--litedram--uart-wisbone-crossover)
+    - [5. PMOD support of BeagleWire](#5-pmod-support-of-beaglewire)
+    - [6. Increase Documentation](#6-increase-documentation)
   - [Github Issue List](#github-issue-list)
   - [Future Improvements](#future-improvements)
   - [References and Acknowledgements](#references-and-acknowledgements)
   - [Benefits](#benefits)
   - [Contributors](#contributors)
 
+## **About**
+
+**About Student**: [Omkar Bhilare](https://omkarbhilare.tech) <br>
+**Mentors**: Michael Welling, Stephen Arnold<br>
+**Code**: [BeagleWire Code](https://github.com/BeagleWire/BeagleWire) | **Docs**: [BeagleWire Software](https://beaglewire.github.io/) | **GSoC**: [BeagleWire GSoC Project](https://summerofcode.withgoogle.com/projects/#4845032915337216) <br>
+**Proposal**: [BeagleWire Software](https://elinux.org/BeagleBoard/GSoC/2021_Proposal/OmkarBhilare) <br>
 
 ## **Introduction:**
 
@@ -167,13 +172,14 @@ Target.py can be found [here](https://github.com/BeagleWire/litex-boards/blob/ua
   |     Player1_Paddle_Down     | PMOD1_1       |
   |     Player2_Paddle_UP     | PMOD1_2     |
   |     Player2_Paddle_Down    | PMOD1_3       |
+
 - Demo:
 
 <p align="center">
 <video  width="520" height="320" controls>
   <source src="https://user-images.githubusercontent.com/40693854/129450815-3e51923c-16e7-4065-a337-7529dd66d2c2.mp4" type="video/mp4">
 </video>
-<p/>
+</p>
 
 
 ### **6. Increase Documentation:**
@@ -211,9 +217,9 @@ embedded robotic systems by Filipe Miguel Monteiro Lopes( [link](https://core.ac
 - Once again this project was possible due to support from my mentor Michael welling at every stage of my project. Also thanks to the other mentors from beagleboard.
 
 ## **Benefits:**
-```
-The completed project will provide the BeagleBoard.org community with easy to implement and powerful tools for the realization of projects based on Programmable Logic Device(FPGA), which will surely increase the number of applications based on it. The developed software will be easy and, at the same time, efficient tool for communication with FPGA. At this point, FPGA will be able to meet the requirements of even more advanced applications. The BeagleWire creates a powerful and versatile digital cape for users to create their imaginative digital designs.
-```
+
+*The completed project will provide the BeagleBoard.org community with easy to implement and powerful tools for the realization of projects based on Programmable Logic Device(FPGA), which will surely increase the number of applications based on it. The developed software will be easy and, at the same time, efficient tool for communication with FPGA. At this point, FPGA will be able to meet the requirements of even more advanced applications. The BeagleWire creates a powerful and versatile digital cape for users to create their imaginative digital designs.*
+
 
 ## **Contributors:**
 
