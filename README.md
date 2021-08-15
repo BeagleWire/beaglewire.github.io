@@ -17,14 +17,16 @@ sort: 1
 - [BeagleWire](#beaglewire---fpga-development-cape-for-the-beaglebone-black)
   - [Introduction](#introduction)
   - [Work Done](#work-done)
-  - [1. Programming BeagleWire](#1.-programming-beaglewire)
-  - [2. Communication between BeagleWire and BBB](#2.-communication-between-beagleWire-and-bbb)
-  - [3. Wishbone Examples with Intercon support](#3.-wishbone-examples-with-intercon-support)
-  - [4. Litex Core: Award Winning Serv + LiteDRAM + UART Wisbone Crossover](#4.-litex-core:-award-winning-serv-+-litedram-+-uart-wisbone-crossover)
-  - [5. PMOD support of BeagleWire](#5.-pmod-support-of-beaglewire)
+    - [1. Programming BeagleWire](#1.-programming-beaglewire)
+    - [2. Communication between BeagleWire and BBB](#2.-communication-between-beagleWire-and-bbb)
+    - [3. Wishbone Examples with Intercon support](#3.-wishbone-examples-with-intercon-support)
+    - [4. Litex Core: Award Winning Serv + LiteDRAM + UART Wisbone Crossover](#4.-litex-core:-award-winning-serv-+-litedram-+-uart-wisbone-crossover)
+    - [5. PMOD support of BeagleWire](#5.-pmod-support-of-beaglewire)
+    - [6. Increase Documentation](#6.-increase-documentation)
   - [Github Issue List](#github-issue-list)
   - [Future Improvements](#future-improvements)
   - [References and Acknowledgements](#references-and-acknowledgements)
+  - [Benefits](#benefits)
   - [Contributors](#contributors)
 
 
@@ -49,12 +51,14 @@ sort: 1
 </p>
 
 -  The BeagleWire Programming Method are as follows:
-1. SPI Flash method:
+
+1. **SPI Flash method:**
     - First we program the BeagleWire onboard SPI flash. After FPGA is reset, it is booted from spi flash. Even after power cut the program is retain. (**Overlay File Name**: BW_ICE40Cape_00A0.dtbo)
     - For this method, I have used **flashrom** which is a utility for identifying, reading, writing, verifying and erasing flash chips.
     - The flow is  we program the spi flash using flashrom with the help of spidev, then we tristate the spi lines from BeagleBone black so on the reboot FPGA can boot from spi flash and run the bitstream.
     - To change the pinmode on the go, I have used `config-pin` utility and for GPMC I have added special modes in the boneblack dtsi file.
-2. ice40-spi kernel method:
+
+2. **ice40-spi kernel method:**
     - Directly programming the FPGA using custom LKM and ice40-spi. in this method FPGA is directly programmed with bitstream and after power cut program is no longer exist. (**Overlay File Name**: BW_ICE40Cape_00A0_LKM.dtbo)
     - To get this method working, I have updated the custom LKM that we were using to program the FPGA.
 
@@ -125,18 +129,19 @@ Target.py can be found [here](https://github.com/BeagleWire/litex-boards/blob/ua
   - [VGA PMOD BY digilent](https://www.digikey.in/en/products/detail/digilent,-inc./410-345/7560228?cur=INR&lang=en)
   - [Encoder PMOD BY digilent](https://www.arrow.com/en/products/410-117/digilent)
   - [LED/Bar-Graph PMOD BY digilent](https://www.digikey.in/en/products/detail/digilent,-inc./410-163/4090191?cur=INR&lang=en)
+  - [Switch PMOD](https://www.mgsuperlabs.in/featured-brands/digilent/pmod-modules/646/pmod-btn-4-user-pushbuttons)
 
-1. LED/Bar-Graph PMOD:
+1. **LED/Bar-Graph PMOD:**
     - Example for LED/Bar-Graph PMOD can be found [here](https://beaglewire.github.io/Examples/bar_graph.html)
     - In this example , two LED PMODs were control by wishbone intercon. 
-2. Encoder PMOD:
+2. **Encoder PMOD:**
     - Example for Encoder PMOD can be found [here](https://beaglewire.github.io/Examples/encoder.html)
     - In this example , LEDs on the beaglewire were control by encoder movement.
-3. VGA PMOD:
+3. **VGA PMOD:**
     - VGA on beaglewire is thoroughly tested with multiple examples:
 <br>
 
-A. VGA Test Pattern generator:
+**A. VGA Test Pattern generator:**
   - VGA Pattern Table: 
 
     | {SW3, USR1, USR 0} | Pattern on VGA |
@@ -152,7 +157,7 @@ A. VGA Test Pattern generator:
 - Detailed Steps can be found [here](https://beaglewire.github.io/Examples/bar_graph.html)
 - Demo Video of VGA Test Pattern can be found here: [Imgur](https://imgur.com/sAeCMZ2)
 
-B. Pong on VGA:
+**B. Pong on VGA:**
 - Switches Information: 
 
   | Switch | Description |
@@ -164,9 +169,18 @@ B. Pong on VGA:
   |     Player2_Paddle_Down    | PMOD1_3       |
 - Demo:
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-    <iframe src="https://user-images.githubusercontent.com/40693854/129450815-3e51923c-16e7-4065-a337-7529dd66d2c2.mp4" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-</div>
+<p align="center">
+<video  width="520" height="320" controls>
+  <source src="https://user-images.githubusercontent.com/40693854/129450815-3e51923c-16e7-4065-a337-7529dd66d2c2.mp4" type="video/mp4">
+</video>
+<p/>
+
+
+### **6. Increase Documentation:**
+- In this GSoC, the beaglewire project was documented very well on https://beaglewire.github.io/
+- All the examples which were tested on beaglewirem, has step by step guide on site: https://beaglewire.github.io/Examples/
+- Getting Started guide with all points added: [here](https://beaglewire.github.io/Blogs/Getting_BBB_Ready_for_BeagleWire.html)
+- Driver Documentation moved to the site: [here](https://beaglewire.github.io/Drivers/)
 
 ## **Github Issue List:**
 
@@ -196,9 +210,15 @@ embedded robotic systems by Filipe Miguel Monteiro Lopes( [link](https://core.ac
 - Thanks to florent from enjoy-digital for solving my doubts related to litex.
 - Once again this project was possible due to support from my mentor Michael welling at every stage of my project. Also thanks to the other mentors from beagleboard.
 
+## **Benefits:**
+```
+The completed project will provide the BeagleBoard.org community with easy to implement and powerful tools for the realization of projects based on Programmable Logic Device(FPGA), which will surely increase the number of applications based on it. The developed software will be easy and, at the same time, efficient tool for communication with FPGA. At this point, FPGA will be able to meet the requirements of even more advanced applications. The BeagleWire creates a powerful and versatile digital cape for users to create their imaginative digital designs.
+```
+
 ## **Contributors:**
 
-The project is the result of the community work and it is still under development. If you can support this project or if you have any questions, feel free to contact us.
-- Michael Welling mwelling@ieee.org (Mentor)
+The project is the result of the community work. If you can support this project or if you have any questions, feel free to contact us.
+
 - Omkar Bhilare ombhilare999@gmail.com (GSoC'21)
+- Michael Welling mwelling@ieee.org (Mentor)
 - Patryk Mezydlo mezydlo.p@gmail.com (GSoC'17)
