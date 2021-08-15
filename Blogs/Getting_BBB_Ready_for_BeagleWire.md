@@ -6,7 +6,7 @@ sort: 1
 
 
 <p align="center">
-    <img width="455" height="315" src="../assets/beaglewire.png">
+    <img width="748" height="421" src="../assets/beaglewire.jpg">
 </p>
 
 ## 1) Flashing BeagleBone Black With New Image
