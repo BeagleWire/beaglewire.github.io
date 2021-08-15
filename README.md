@@ -8,7 +8,7 @@ sort: 1
 ## BeagleWire - FPGA development cape for the BeagleBone Black
 
 <p align="center">
-    <img width="748" height="421" src="assets/beaglewire.jpg">
+    <img width="520" height="360" src="assets/beaglewire.jpg">
 </p>
 
 ## Table of Contents
