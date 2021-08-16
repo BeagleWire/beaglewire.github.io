@@ -8,7 +8,7 @@ sort: 1
 ## BeagleWire - FPGA development cape for the BeagleBone Black
 
 <p align="center">
-    <img width="520" height="360" src="assets/beaglewire.jpg">
+    <img width="480" height="320" src="assets/beaglewire.jpg">
 </p>
 
 ## Table of Contents
@@ -183,8 +183,8 @@ Target.py can be found [here](https://github.com/BeagleWire/litex-boards/blob/ua
 
 
 ### **6. Increase Documentation:**
-- In this GSoC, the beaglewire project was documented very well on https://beaglewire.github.io/
-- All the examples which were tested on beaglewirem, has step by step guide on site: https://beaglewire.github.io/Examples/
+- In this GSoC, the beaglewire project was documented very well on [beaglewire.github.io](https://beaglewire.github.io/)
+- All the examples which were tested on beaglewire, has step by step guide on site: [beaglewire.github.io/Examples](https://beaglewire.github.io/Examples/)
 - Getting Started guide with all points added: [here](https://beaglewire.github.io/Blogs/Getting_BBB_Ready_for_BeagleWire.html)
 - Driver Documentation moved to the site: [here](https://beaglewire.github.io/Drivers/)
 
@@ -218,7 +218,7 @@ embedded robotic systems by Filipe Miguel Monteiro Lopes( [link](https://core.ac
 
 ## **Benefits:**
 
-*The completed project will provide the BeagleBoard.org community with easy to implement and powerful tools for the realization of projects based on Programmable Logic Device(FPGA), which will surely increase the number of applications based on it. The developed software will be easy and, at the same time, efficient tool for communication with FPGA. At this point, FPGA will be able to meet the requirements of even more advanced applications. The BeagleWire creates a powerful and versatile digital cape for users to create their imaginative digital designs.*
+*The completed project is providing the BeagleBoard.org community with easy to implement and powerful tools for the realization of projects based on Programmable Logic Device(FPGA), which will surely increase the number of applications based on it. The developed software is easy and, at the same time, efficient tool for communication with FPGA. The BeagleWire creates a powerful and versatile digital cape for users to create their imaginative digital designs.*
 
 
 ## **Contributors:**
