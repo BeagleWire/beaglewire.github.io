@@ -131,10 +131,11 @@ Target.py can be found [here](https://github.com/BeagleWire/litex-boards/blob/ua
 ### **5. PMOD support of BeagleWire:**
 
 - Following PMODs are interfaced to BeagleWire in this GSoC:
-  - [VGA PMOD BY digilent](https://www.digikey.in/en/products/detail/digilent,-inc./410-345/7560228?cur=INR&lang=en)
-  - [Encoder PMOD BY digilent](https://www.arrow.com/en/products/410-117/digilent)
-  - [LED/Bar-Graph PMOD BY digilent](https://www.digikey.in/en/products/detail/digilent,-inc./410-163/4090191?cur=INR&lang=en)
-  - [Switch PMOD](https://www.mgsuperlabs.in/featured-brands/digilent/pmod-modules/646/pmod-btn-4-user-pushbuttons)
+
+| [VGA PMOD](https://www.digikey.in/en/products/detail/digilent,-inc./410-345/7560228?cur=INR&lang=en)   | [Encoder PMOD](https://www.arrow.com/en/products/410-117/digilent) | [LED/Bar-Graph PMOD](https://www.digikey.in/en/products/detail/digilent,-inc./410-163/4090191?cur=INR&lang=en)  | [Switch PMOD](https://www.mgsuperlabs.in/featured-brands/digilent/pmod-modules/646/pmod-btn-4-user-pushbuttons) |
+| ---------- |:------:| :-----:| :-----:|
+| <img src="assets/vga.jpg" width="100" height="100" />| <img src="assets/encoder.jpg" width="100" height="100" /> | <img src="assets/led.jpg" width="100" height="100" /> | <img src="assets/switch.png" width="100" height="100" />| 
+
 
 1. **LED/Bar-Graph PMOD:**
     - Example for LED/Bar-Graph PMOD can be found [here](https://beaglewire.github.io/Examples/bar_graph.html)
@@ -142,7 +143,9 @@ Target.py can be found [here](https://github.com/BeagleWire/litex-boards/blob/ua
 2. **Encoder PMOD:**
     - Example for Encoder PMOD can be found [here](https://beaglewire.github.io/Examples/encoder.html)
     - In this example , LEDs on the beaglewire were control by encoder movement.
-3. **VGA PMOD:**
+2. **Switch PMOD:** 
+    - [Switch PMOD](https://www.mgsuperlabs.in/featured-brands/digilent/pmod-modules/646/pmod-btn-4-user-pushbuttons) can be used in VGA-pong game
+4. **VGA PMOD:**
     - VGA on beaglewire is thoroughly tested with multiple examples:
 <br>
 
@@ -163,6 +166,7 @@ Target.py can be found [here](https://github.com/BeagleWire/litex-boards/blob/ua
 - Demo Video of VGA Test Pattern can be found here: [Imgur](https://imgur.com/sAeCMZ2)
 
 **B. Pong on VGA:**
+- I have used switches on the breadboard with pull down resistors, but one can also use the switch pmod instead, please look into pcf of this example for more details.
 - Switches Information: 
 
   | Switch | Description |
