@@ -8,7 +8,7 @@ sort: 1
 ## BeagleWire - FPGA development cape for the BeagleBone Black
 
 <p align="center">
-    <img width="480" height="320" src="assets/beaglewire.jpg">
+    <img width="480" height="320" src="assets/Beagle_Gsoc.jpeg">
 </p>
 
 ## Table of Contents
@@ -23,6 +23,7 @@ sort: 1
     - [5. PMOD support of BeagleWire](#5-pmod-support-of-beaglewire)
     - [6. Increase Documentation](#6-increase-documentation)
   - [Github Issue List](#github-issue-list)
+  - [PR Status](#pr-status)
   - [Future Improvements](#future-improvements)
   - [References and Acknowledgements](#references-and-acknowledgements)
   - [Benefits](#benefits)
@@ -207,6 +208,15 @@ This is the issue/task list was on the beaglewire software repo, which were reso
 - [x]  sdram issues [#10](https://github.com/pmezydlo/BeagleWire/issues/10)  [#7](https://github.com/pmezydlo/BeagleWire/issues/7) [#8](https://github.com/pmezydlo/BeagleWire/issues/8#issue-339423429) **Solved it [here](https://beaglewire.github.io/Blogs/BeagleWire-Litex.html)**
 - [x] gpmc seems to occasionally mis-time address/data [#9](https://github.com/pmezydlo/BeagleWire/issues/9) **Solved it [here](https://github.com/pmezydlo/BeagleWire/issues/9#issuecomment-899037565)**
 - [x]  Gate timing issues [#18](https://github.com/pmezydlo/BeagleWire/issues/18) **Solved it [here](https://github.com/pmezydlo/BeagleWire/issues/18#issuecomment-899038344)**
+
+## **PR Status:**
+
+| PR | Description | Status
+  | ----------- | ----------- | :-----:  |
+  |  BeagleWire ( [#2](https://github.com/BeagleWire/BeagleWire/pull/2) ) | LKM update, Examples Readme Added and Make File improved   | **Merged** |
+  |  BeagleWire ( [#3](https://github.com/BeagleWire/BeagleWire/pull/3) ) | GPMC to Wishbone Component , Wishbone Slave Examples, new prog method and many more.   | **Merged** |
+  |  BeagleBoard-DeviceTrees( [#37](https://github.com/beagleboard/BeagleBoard-DeviceTrees/pull/37) ) | GPMC modes added in bone-common in univ, BeagleWire overlays added | **Merged** |
+  |  litex-boards ( [#254](https://github.com/litex-hub/litex-boards/pull/254) ) | beaglewire platform and target added in litex  | **Open** |
 
 ## **Future Improvements:**
 - In this GSoC due to limited time span I couldn't test peripherals. After discussion with mentor we have decided the litex peripherals might be good idea as support for this project. Post GSoC I will be looking into this.
