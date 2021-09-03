@@ -216,7 +216,7 @@ This is the issue/task list was on the beaglewire software repo, which were reso
   |  BeagleWire ( [#2](https://github.com/BeagleWire/BeagleWire/pull/2) ) | LKM update, Examples Readme Added and Make File improved   |  <span style="color:green">+74 </span> <span style="color:red">−8 </span> | **Merged** |
   |  BeagleWire ( [#3](https://github.com/BeagleWire/BeagleWire/pull/3) ) | GPMC to Wishbone Component , Wishbone Slave Examples, new prog method and many more. | <span style="color:green">+13,749 </span> <span style="color:red"> −1,982</span> | **Merged** |
   |  BeagleBoard-DeviceTrees( [#37](https://github.com/beagleboard/BeagleBoard-DeviceTrees/pull/37) ) | GPMC modes added in bone-common in univ, BeagleWire overlays added | <span style="color:green">+409</span><span style="color:red"> −25</span> | **Merged** |
-  |  litex-boards ( [#254](https://github.com/litex-hub/litex-boards/pull/254) ) | beaglewire platform and target added in litex  | <span style="color:green">+232</span><span style="color:red"> -0</span> | **Open** |
+  |  litex-boards ( [#254](https://github.com/litex-hub/litex-boards/pull/254) ) | beaglewire platform and target added in litex  | <span style="color:green">+232</span><span style="color:red"> -0</span> | **Merged** |
 
 ## **Future Improvements:**
 - In this GSoC due to limited time span I couldn't test peripherals. After discussion with mentor we have decided the litex peripherals might be good idea as support for this project. Post GSoC I will be looking into this.
